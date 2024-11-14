@@ -1,6 +1,6 @@
 """Code Example for Keygen"""
 
-from keygen.keygen import Keygen
+from src.keygen import Keygen
 
 # Keygen.sh
 KEYGEN_ACCOUNT_ID = ""  # ex: "00000000-0000-0000-0000-000000000000"

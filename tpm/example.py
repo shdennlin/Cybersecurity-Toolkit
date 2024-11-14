@@ -2,7 +2,7 @@
 
 from hashlib import sha256
 
-from tpm.tpm_decrypter import TPMDecrypter
+from src.tpm_decrypter import TPMDecrypter
 
 # TPMDecrypter
 TPM_ADDRESS = ""  # TPM Address, ex: "0x81000000"
