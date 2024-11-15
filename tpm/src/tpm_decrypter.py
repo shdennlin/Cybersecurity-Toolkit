@@ -20,7 +20,7 @@ def secure_delete(file_path, passes=10):
 class TPMDecrypter:
     """TPM Decrypter class to decrypt files using TPM2.0"""
 
-    def unseal_key(self, tpm_address) -> bytes:
+    def unseal_key(self, tpm_address: str) -> bytes:
         """
         Unseals a key from the TPM (Trusted Platform Module) using the provided TPM address.
 
@@ -34,6 +34,8 @@ class TPMDecrypter:
             ValueError: If the unsealed key size is not 16, 24, or 32 bytes.
             RuntimeError: If the TPM unsealing process fails.
         """
+        if tpm_address is None or tpm_address == "":
+            raise ValueError("TPM address is required to unseal the key.")
         try:
             result = subprocess.run(
                 ['tpm2_unseal', '-c', tpm_address],
@@ -64,6 +66,12 @@ class TPMDecrypter:
         Raises:
             RuntimeError: If decryption fails due to an error in the OpenSSL command.
         """
+        if key is None or key == b"":
+            raise ValueError("Key is required for decryption")
+        if encrypted_file_path is None or encrypted_file_path == "":
+            raise ValueError("Encrypted file path is required for decryption.")
+        if not os.path.exists(encrypted_file_path):
+            raise FileNotFoundError(f"Encrypted file not found at path: {encrypted_file_path}")
         temp_key_file_path: str = ""
         decrypted_data: bytes = b""
         try:

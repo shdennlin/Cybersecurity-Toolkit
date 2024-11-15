@@ -47,7 +47,7 @@ file=$1
 file_enc=${file}.enc
 tpm_address=$2
 set -x
-# Generate a 128-bit AES key and save it to key.bin
+# Generate a 32 bytes AES key and save it to key.bin
 openssl rand -out key.bin 32
 # Encrypt file using the generated AES key
 openssl enc -aes-256-cbc -in ${file} -out ${file_enc} -pass file:./key.bin -pbkdf2 -iter 10000

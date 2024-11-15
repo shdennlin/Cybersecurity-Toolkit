@@ -11,9 +11,8 @@ ENCRYPTED_FILE = ""  # Encrypted file path, ex: "./encrypted_file.enc"
 
 def file_decrypt():
     """Model decrypt Example"""
-    decrypter = TPMDecrypter()
-    key = decrypter.unseal_key(TPM_ADDRESS)
-    decrypted_data = decrypter.decrypt_file_aes_256_cbc(key, ENCRYPTED_FILE)
+    key = TPMDecrypter().unseal_key(TPM_ADDRESS)
+    decrypted_data = TPMDecrypter().decrypt_file_aes_256_cbc(key, ENCRYPTED_FILE)
     del key
 
     sha256_checksum = sha256(decrypted_data).hexdigest()
