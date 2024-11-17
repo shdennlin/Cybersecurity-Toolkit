@@ -24,6 +24,7 @@
 
     ``` bash
     sudo groupadd tss
+    sudo usermod -aG tss $USER
     newgrp tss
     ```
 
